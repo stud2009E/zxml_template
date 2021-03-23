@@ -1,0 +1,42 @@
+<core:View xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+    xmlns:l="sap.ui.layout.form"
+    xmlns:smf="sap.ui.comp.smartform"
+	xmlns:template="http://schemas.sap.com/sapui5/extension/sap.ui.core.template/1">
+    
+    <template:alias name="TU" value="z.xml.tmpl.module.TemplateUtils">
+        <template:alias name="AH" value="sap.ui.model.odata.AnnotationHelper">
+            <template:with path="meta>com.sap.vocabularies.UI.v1.FieldGroup" var="group">
+                
+                <template:repeat list="{group>Data}">
+                    <Text text="{group>Value/Path}"
+                        class="sapUiSmallMargin"/>
+                </template:repeat>
+
+                <template:repeat list="{group>Data}">
+                    <Text text="{
+                        path:'group>',
+                        formatter:'TU.exampleFormatter'
+                    }"
+                    class="sapUiSmallMargin"/>
+                </template:repeat>
+
+                <l:SimpleForm>
+                    <template:repeat list="{group>Data}">
+                        <template:with path="group>Value" helper="AH.resolvePath" var="navPath">
+                            <Label text="{
+                                path: 'navPath>com.sap.vocabularies.Common.v1.Label', 
+                                formatter:'AH.format'
+                            }"/>
+                        </template:with>
+                        <Input value="{path: 'group>Value', formatter:'AH.format'}"/>
+                    </template:repeat>
+                </l:SimpleForm>
+
+            </template:with>
+
+        </template:alias>
+    </template:alias>
+</core:View>
+
