@@ -16,7 +16,7 @@
 	</edmx:Reference>
 	<edmx:DataServices>
 		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="annotation.CUSTOM_DATA_SRV">
-			<Annotations Target="Metadata.TestDataType">
+			<Annotations Target="Metadata.HeaderType">
 				<Annotation Term="UI.LineItem">
 					<Collection>
 						<Record Type="UI.DataField">
@@ -46,6 +46,14 @@
 					</Collection>
 				</Annotation>
 
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="to_Body/@UI.LineItem"/>
+						</Record>
+					</Collection>
+				</Annotation>
+
 				<Annotation Term="UI.FieldGroup">
 					<Record Type="UI.FieldGroupType">
 						<PropertyValue Property="Data">
@@ -63,7 +71,22 @@
 						</PropertyValue>
 					</Record>
 				</Annotation>
+			</Annotations>
 
+			<Annotations Target="Metadata.BodyType">
+				<Annotation Term="UI.LineItem" >
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="ID"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="Name"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="Description"/>
+						</Record>
+					</Collection>
+				</Annotation>
 			</Annotations>
 		</Schema>
 	</edmx:DataServices>

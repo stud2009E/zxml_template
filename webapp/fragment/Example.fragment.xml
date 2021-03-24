@@ -5,7 +5,7 @@
 
     <smt:SmartTable 
         enableAutoBinding="true"
-        entitySet="TestDataSet"
+        entitySet="HeaderSet"
         requestAtLeastFields="Byte">
         <t:Table/>
     </smt:SmartTable>

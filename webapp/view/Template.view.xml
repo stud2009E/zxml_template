@@ -1,6 +1,7 @@
 <core:View xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
+    xmlns:t="sap.ui.table"
     xmlns:l="sap.ui.layout.form"
     xmlns:smf="sap.ui.comp.smartform"
 	xmlns:template="http://schemas.sap.com/sapui5/extension/sap.ui.core.template/1">
@@ -9,18 +10,33 @@
         <template:alias name="AH" value="sap.ui.model.odata.AnnotationHelper">
             <template:with path="meta>com.sap.vocabularies.UI.v1.FieldGroup" var="group">
                 
-                <template:repeat list="{group>Data}">
-                    <Text text="{group>Value/Path}"
-                        class="sapUiSmallMargin"/>
-                </template:repeat>
+                <VBox>
+                    <template:repeat list="{group>Data}">
+                        <Text text="{group>Value/Path}"
+                            class="sapUiSmallMargin"/>
+                    </template:repeat>
 
-                <template:repeat list="{group>Data}">
-                    <Text text="{
-                        path:'group>',
-                        formatter:'TU.exampleFormatter'
-                    }"
-                    class="sapUiSmallMargin"/>
-                </template:repeat>
+                    <template:repeat list="{group>Data}">
+                        <Text text="{
+                            path:'group>',
+                            formatter:'TU.exampleFormatter'
+                        }"
+                        class="sapUiSmallMargin"/>
+                    </template:repeat>
+                    
+                    <template:with path="device>" var="system">
+                        <template:if test="{system>desktop}">
+                            <template:then>
+                                <Text text="Desktop" 
+                                    class="sapUiSmallMargin"/>
+                            </template:then>
+                            <template:elseif test="{system>phone}">
+                                <Text text="Phone"
+                                    class="sapUiSmallMargin"/>
+                            </template:elseif>
+                        </template:if>
+                    </template:with>
+                </VBox>
 
                 <l:SimpleForm>
                     <template:repeat list="{group>Data}">
@@ -35,6 +51,24 @@
                 </l:SimpleForm>
 
             </template:with>
+
+            <template:repeat list="{meta>com.sap.vocabularies.UI.v1.Facets}" var="facet">
+                <template:if test="{path: 'facet>Target', formatter: 'sap.ui.model.odata.AnnotationHelper.getNavigationPath'}">
+                    <template:if test="{device>desktop}">
+                        <template:then>
+                            <core:Fragment fragmentName="z.xml.tmpl.fragment.GridTable" type="XML"/>
+                        </template:then>
+
+                        <template:elseif test="{device>phone}">
+                            <core:Fragment fragmentName="z.xml.tmpl.fragment.MobileTable" type="XML"/>
+                        </template:elseif>
+                        
+                        <template:else>
+                            <Text text="Not supported"/>
+                        </template:else>
+                    </template:if>
+                </template:if>
+            </template:repeat>
 
         </template:alias>
     </template:alias>

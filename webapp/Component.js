@@ -1,15 +1,17 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
-	"sap/m/VBox",
+	"sap/m/Page",
 	"sap/ui/core/mvc/View",
 	"sap/ui/core/mvc/ViewType",
-	"z/xml/tmpl/module/TemplateUtils"
+	"z/xml/tmpl/module/TemplateUtils",
+	"z/xml/tmpl/module/Models"
 ], function (
     UIComponent,
-	VBox,
+	Page,
 	View,
 	ViewType,
-	TemplateUtils
+	TemplateUtils,
+	Models
 ) {
 	"use strict";
 
@@ -24,16 +26,21 @@ sap.ui.define([
 		},
 
 		createContent: function(){
-			var oContainer = new VBox();
+			var oContainer = new Page({
+				height:"100%"
+			});
 			var oModel = this.getModel();
 			var oMetaModel = oModel.getMetaModel();
 			var sPath = null;
+
+			var oDeviceModel = Models.createDeviceModel();
+			this.setModel(oDeviceModel, "device");
 
 			oMetaModel.loaded().then(function(){
 				return oModel.annotationsLoaded();
 			}).then(function(){
 
-				sPath = oModel.createKey("/TestDataSet", {
+				sPath = oModel.createKey("/HeaderSet", {
 					Guid: "1f707e91-0fef-4c88-ade1-65e932921a25"
 				});
 
@@ -43,10 +50,12 @@ sap.ui.define([
 					preprocessors: {
 						xml: {
 							bindingContexts:{
-								meta: oMetaModel.getMetaContext(sPath)
+								meta: oMetaModel.getMetaContext(sPath),
+								device: oDeviceModel.createBindingContext("/system")
 							},
 							models: {
-								meta: oMetaModel
+								meta: oMetaModel,
+								device: oDeviceModel
 							}
 						}
 					}
@@ -55,7 +64,7 @@ sap.ui.define([
 				oView.bindElement({
 					path: sPath
 				});
-				oContainer.addItem(oView);
+				oContainer.addContent(oView);
 			});
 
 			return oContainer;
