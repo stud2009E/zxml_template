@@ -26,9 +26,7 @@ sap.ui.define([
 		},
 
 		createContent: function(){
-			var oContainer = new Page({
-				height:"100%"
-			});
+			var oContainer = new Page();
 			var oModel = this.getModel();
 			var oMetaModel = oModel.getMetaModel();
 			var sPath = null;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
    <edmx:DataServices m:DataServiceVersion="2.0">
-      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="CUSTOM_DATA_SRV" xml:lang="ru" sap:schema-version="1">
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="XML_TEMPL_DATA_SRV" xml:lang="ru" sap:schema-version="1">
          <EntityType Name="HeaderType" sap:label="Header" sap:content-version="1">
             <Key>
                <PropertyRef Name="Guid" />
@@ -16,7 +16,7 @@
             <Property Name="Time" Type="Edm.Time" MaxLength="10" Nullable="false" sap:label="Time"/>
             <Property Name="Byte" Type="Edm.Byte" MaxLength="10" Nullable="false" sap:label="Byte"/>
             <NavigationProperty Name="to_Body" 
-               Relationship="CUSTOM_DATA_SRV.assoc_HeaderBody" 
+               Relationship="XML_TEMPL_DATA_SRV.assoc_HeaderBody" 
                FromRole="FromRole_HeaderBody" 
                ToRole="ToRole_HeaderBody"/>
          </EntityType>
@@ -33,8 +33,8 @@
          </EntityType>
 
          <Association Name="assoc_HeaderBody" sap:content-version="1">
-            <End Type="CUSTOM_DATA_SRV.HeaderType" Multiplicity="1" Role="FromRole_HeaderBody"/>
-            <End Type="CUSTOM_DATA_SRV.BodyType" Multiplicity="*" Role="ToRole_HeaderBody"/>
+            <End Type="XML_TEMPL_DATA_SRV.HeaderType" Multiplicity="1" Role="FromRole_HeaderBody"/>
+            <End Type="XML_TEMPL_DATA_SRV.BodyType" Multiplicity="*" Role="ToRole_HeaderBody"/>
             <ReferentialConstraint>
                <Principal Role="FromRole_HeaderBody">
                   <PropertyRef Name="Guid"/>
@@ -45,11 +45,11 @@
             </ReferentialConstraint>
          </Association>
 
-         <EntityContainer Name="CUSTOM_DATA_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
-            <EntitySet Name="HeaderSet" EntityType="CUSTOM_DATA_SRV.HeaderType" sap:content-version="1" />
-            <EntitySet Name="BodySet" EntityType="CUSTOM_DATA_SRV.BodyType" sap:content-version="1" />
+         <EntityContainer Name="XML_TEMPL_DATA_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+            <EntitySet Name="HeaderSet" EntityType="XML_TEMPL_DATA_SRV.HeaderType" sap:content-version="1" />
+            <EntitySet Name="BodySet" EntityType="XML_TEMPL_DATA_SRV.BodyType" sap:content-version="1" />
 
-            <AssociationSet Name="set_assoc_HeaderBody" Association="CUSTOM_DATA_SRV.assoc_HeaderBody" sap:content-version="1">
+            <AssociationSet Name="set_assoc_HeaderBody" Association="XML_TEMPL_DATA_SRV.assoc_HeaderBody" sap:content-version="1">
                <End EntitySet="HeaderSet" Role="FromRole_HeaderBody"/>
                <End EntitySet="BodySet" Role="ToRole_HeaderBody"/>
             </AssociationSet>

@@ -11,7 +11,7 @@
 		},
 		"dataSources": {
 			"mainService": {
-				"uri": "/sap/opu/odata/sap/CUSTOM_DATA_SRV/",
+				"uri": "/sap/opu/odata/sap/XML_TEMPL_DATA_SRV/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",

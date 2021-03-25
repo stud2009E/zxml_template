@@ -16,15 +16,15 @@
                             class="sapUiSmallMargin"/>
                     </template:repeat>
 
-                    <template:repeat list="{group>Data}">
+                    <!-- <template:repeat list="{group>Data}">
                         <Text text="{
                             path:'group>',
                             formatter:'TU.exampleFormatter'
                         }"
                         class="sapUiSmallMargin"/>
                     </template:repeat>
-                    
-                    <template:with path="device>" var="system">
+                     -->
+                    <!-- <template:with path="device>" var="system">
                         <template:if test="{system>desktop}">
                             <template:then>
                                 <Text text="Desktop" 
@@ -35,10 +35,10 @@
                                     class="sapUiSmallMargin"/>
                             </template:elseif>
                         </template:if>
-                    </template:with>
+                    </template:with> -->
                 </VBox>
 
-                <l:SimpleForm>
+                <!-- <l:SimpleForm>
                     <template:repeat list="{group>Data}">
                         <template:with path="group>Value" helper="AH.resolvePath" var="navPath">
                             <Label text="{
@@ -48,11 +48,11 @@
                         </template:with>
                         <Input value="{path: 'group>Value', formatter:'AH.format'}"/>
                     </template:repeat>
-                </l:SimpleForm>
+                </l:SimpleForm> -->
 
             </template:with>
 
-            <template:repeat list="{meta>com.sap.vocabularies.UI.v1.Facets}" var="facet">
+            <!-- <template:repeat list="{meta>com.sap.vocabularies.UI.v1.Facets}" var="facet">
                 <template:if test="{path: 'facet>Target', formatter: 'sap.ui.model.odata.AnnotationHelper.getNavigationPath'}">
                     <template:if test="{device>desktop}">
                         <template:then>
@@ -68,7 +68,7 @@
                         </template:else>
                     </template:if>
                 </template:if>
-            </template:repeat>
+            </template:repeat> -->
 
         </template:alias>
     </template:alias>
